@@ -792,5 +792,31 @@ describe('lion-select-rich', () => {
       );
       expect(el.modelValue).to.equal('');
     });
+
+    class MyElement extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+      }
+
+      connectedCallback() {
+        this.shadowRoot.innerHTML = `
+        <lion-select-rich label="foo">
+          <lion-options>test</lion-options>
+        </lion-select-rich>`;
+      }
+    }
+    customElements.define('my-element', MyElement);
+
+    it('should not break snapshot testing', async () => {
+      const element = await fixture(
+        html`
+          <my-element></my-element>
+        `,
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      expect(element).shadowDom.to.equalSnapshot();
+    });
   });
 });
