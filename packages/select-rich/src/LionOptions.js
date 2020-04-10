@@ -30,6 +30,15 @@ export class LionOptions extends FormRegistrarPortalMixin(LitElement) {
     this.tabIndex = 0;
   }
 
+  connectedCallback() {
+    console.log('LionOptions before connectedCallback', this.registrationTarget);
+    debugger
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    console.log('LionOptions after connectedCallback', this.registrationTarget);
+  }
+
   createRenderRoot() {
     return this;
   }

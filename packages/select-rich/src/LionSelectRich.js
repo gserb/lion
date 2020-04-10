@@ -163,6 +163,7 @@ export class LionSelectRich extends ScopedElementsMixin(
   }
 
   set checkedIndex(index) {
+    debugger
     if (this._listboxNode.children[index]) {
       this._listboxNode.children[index].checked = true;
     }
@@ -196,12 +197,16 @@ export class LionSelectRich extends ScopedElementsMixin(
     this.__hasInitialSelectedFormElement = false;
     this.hasNoDefaultSelected = false;
     this._repropagationRole = 'choice-group'; // configures FormControlMixin
+    // console.log('LionSelectRich constructor');
     this.__setupEventListeners();
     this.__initInteractionStates();
   }
 
   connectedCallback() {
     this._listboxNode.registrationTarget = this;
+    console.log('LionSelectRich connectedCallback', !!this._listboxNode.registrationTarget);
+    console.log('LionSelectRich connectedCallback this._listboxNode', this._listboxNode);
+
     if (super.connectedCallback) {
       super.connectedCallback();
     }

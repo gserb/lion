@@ -29,6 +29,7 @@ export const FormRegistrarPortalMixin = dedupeMixin(
       }
 
       connectedCallback() {
+        console.log('FormRegistrarPortalMixin connectedCallback');
         if (super.connectedCallback) {
           super.connectedCallback();
         }
@@ -75,6 +76,8 @@ export const FormRegistrarPortalMixin = dedupeMixin(
 
       __checkRegistrationTarget() {
         if (!this.registrationTarget) {
+          // debugger
+          // console.log('registrationTargetcrapat',this)
           throw new Error('A FormRegistrarPortal element requires a .registrationTarget');
         }
       }

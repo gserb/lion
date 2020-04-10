@@ -801,10 +801,16 @@ describe('lion-select-rich', () => {
 
       connectedCallback() {
         this.shadowRoot.innerHTML = `
-        <lion-select-rich label="foo">
-          <lion-options>test</lion-options>
-        </lion-select-rich>`;
+          <lion-select-rich name="favoriteColor" label="Favorite color">
+            <lion-options slot="input">
+              <lion-option .choiceValue=${'red'}>Red</lion-option>
+              <lion-option .choiceValue=${'hotpink'} checked>Hotpink</lion-option>
+              <lion-option .choiceValue=${'teal'}>Teal</lion-option>
+            </lion-options>
+          </lion-select-rich>
+        `;
       }
+
     }
     customElements.define('my-element', MyElement);
 
@@ -814,6 +820,8 @@ describe('lion-select-rich', () => {
           <my-element></my-element>
         `,
       );
+
+      // console.log('element.shadowRoot._listboxNode', element.shadowRoot._listboxNode);
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       expect(element).shadowDom.to.equalSnapshot();
